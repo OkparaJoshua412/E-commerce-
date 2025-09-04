@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Smart Tech Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      nav {
+        text-align: center;
+        background-color: black;
+        padding: 30px;
+      }
+      nav a {
+        margin: 0 15px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav a:hover {
+        color: yellow;
+      }
+      footer {
+        text-align: center;
+        background-color: black;
+        color: white;
+        padding: 20px;
+      }
+      button {
+        background-color: yellow;
+        border: none;
+        padding: 8px 12px;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      body {
+        background-color: white;
+        color: black;
+        font-family: Arial, sans-serif;
+        margin: 0;
+      }
+      div {
+        text-align: center;
+      }
+      #demo {
+        font-size: 20px;
+        min-height: 20px;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      /* PRODUCTS CONTAINER */
+      .products-container {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;   /* allows horizontal scroll */
+        gap: 20px;
+        padding: 20px;
+        scroll-behavior: smooth;
+      }
+
+      /* PRODUCT CARD */
+      .product {
+        flex: 0 0 auto;
+        width: 200px;
+        border: 1px solid #ccc;
+        padding: 15px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      }
+      .product img {
+        width: 100px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      /* CART */
+      #cart {
+        margin: 30px auto;
+        padding: 20px;
+        width: 80%;
+        max-width: 500px;
+        border: 2px solid black;
+        border-radius: 10px;
+        background: #f1f1f1;
+      }
+      #cart h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SMART TECH STORE</h1>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/en/a/ab/Techlink-logo.jpg" width="200">
+    </div>
+    <br>
+    <nav>
+      <a href="./E-commerce.html">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="./contact.html">Contact</a>
+    </nav>
+    <br>
+    <h3 style="text-align:center;">YOUR SMART FAVOURITE GADGET AT BEST PRICE</h3>
+    <div style="text-align:center;">
+      <button id="shop">SHOP NOW</button>
+    </div>
+    <main>
+      <h3 id="shop" style="text-align:center;">Products</h3>
+
+      <!-- PRODUCTS LIST -->
+      <div class="products-container">
+        <div class="product">
+          <h4>Smart Phone - ₦1,100,000</h4>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Foldable_Smartphones.jpg">
+          <p>Galaxy Z Fold and more...</p>
+          <button onclick="addToCart('Smart Phone',1100000)">Add to cart</button>
+        </div>
+
+        <div class="product">
+          <h4>Smart Bulb - ₦35,000</h4>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Philips_Hue_hub_and_2_bulbs.jpg">
+          <p>Philips Hue and more...</p>
+          <button onclick="addToCart('Smart Bulb',35000)">Add to cart</button>
+        </div>
+
+        <div class="product">
+          <h4>Laptops - ₦400,000+</h4>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Laptop_collage.jpg">
+          <p>Different brands available</p>
+          <button onclick="addToCart('Laptop',400000)">Add to cart</button>
+        </div>
+
+        <div class="product">
+          <h4>Headphones - ₦25,000</h4>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/S%C5%82uchawki_referencyjne_K-701_firmy_AKG.jpg">
+          <p>With stand</p>
+          <button onclick="addToCart('Headphones',25000)">Add to cart</button>
+        </div>
+
+        <div class="product">
+          <h4>CCTV - ₦70,000</h4>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Three_Surveillance_cameras.jpg">
+          <p>High quality surveillance</p>
+          <button onclick="addToCart('CCTV Camera',70000)">Add to cart</button>
+        </div>
+      </div>
+
+      <p style="text-align:center;">For more products: <a href="http://www.temu.com">Visit Temu Shop</a></p>
+
+      <!-- CART SECTION -->
+      <div id="cart">
+        <h2>🛒 Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <p><b>Total: ₦<span id="total">0</span></b></p>
+      </div>
+
+      <h3 style="text-align:center;">Sign up now and get 10% off + free shipping on orders above ₦10,000</h3>
+    </main>
+
+    <footer>© 2025 Smart Tech Store. All rights reserved</footer>
+
+    <script>
+      let cart = [];
+      let total = 0;
+
+      function addToCart(product, price) {
+        cart.push({name: product, price: price});
+        total += price;
+        displayCart();
+      }
+
+      function displayCart() {
+        let cartList = document.getElementById("cart-items");
+        cartList.innerHTML = "";
+
+        cart.forEach(item => {
+          let li = document.createElement("li");
+          li.textContent = item.name + " - ₦" + item.price;
+          cartList.appendChild(li);
+        });
+
+        document.getElementById("total").textContent = total;
+      }
+    </script>
+  </body>
+</html>
